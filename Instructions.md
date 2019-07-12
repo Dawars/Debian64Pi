@@ -58,16 +58,15 @@ This will take a bit of time depending on your internet connection.
 
 Once it’s done, chroot into your ext4 filesystem:
 
-<code>sudo mount -o bind /proc /mnt/proc</code>
-
-<code>sudo mount -o bind /sys /mnt/sys</code>
-
-<code>sudo mount -o bind /dev /mnt/dev</code>
-
-<code>sudo mount -o bind /dev/pts /mnt/dev/pts</code>
-
-<code>sudo cp /etc/resolv.conf /mnt/etc/resolv.conf</code>
-
+```
+sudo mount -o bind /proc /mnt/proc
+sudo mount -o bind /sys /mnt/sys
+sudo mount -o bind /dev /mnt/dev
+sudo mount -o bind /dev/pts /mnt/dev/pts
+```
+```
+sudo cp /etc/resolv.conf /mnt/etc/resolv.conf
+```
 <code>sudo chroot /mnt</code>
 
 Install ca-certificates, dbus, sudo packages:
@@ -80,11 +79,13 @@ Restart the dbus service:
 
 Now, replace /etc/fstab with the following: 
 
-<code>proc /proc proc defaults 0 0</code>
+```
+proc /proc proc defaults 0 0
 
-<code>/dev/mmcblk0p1 /boot vfat defaults 0 2</code>
+/dev/mmcblk0p1 /boot vfat defaults 0 2
 
-<code>/dev/mmcblk0p2 / ext4 defaults,noatime 0 1</code>
+/dev/mmcblk0p2 / ext4 defaults,noatime 0 1
+```
 
 If you plan on using this image on a USB stick or hard drive rather than a microSD card, you’ll need to have programmed the OTP to boot from a USB external device if no microSD is found beforehand (this is unnecessary on the Pi 3B+ as USB booting is already on by default). To configure Debian to boot from USB, put the following in your /etc/fstab instead: 
 
@@ -96,7 +97,9 @@ If you plan on using this image on a USB stick or hard drive rather than a micro
 
 Install firmware and networking packages:
 
-<code>apt install wpasupplicant wireless-tools firmware-atheros firmware-brcm80211 firmware-libertas firmware-misc-nonfree firmware-realtek dhcpcd5 net-tools</code>
+<code>apt install wpasupplicant wireless-tools dhcpcd5 net-tools</code>
+
+// firmware-atheros firmware-brcm80211 firmware-libertas firmware-misc-nonfree firmware-realtek
 
 Some of the WiFi firmware included in the firmware-brcm80211 package are incompatible with the Pi. Pi-compatible WiFi drivers can be downloaded by following the <a href="https://wiki.ubuntu.com/ARM/RaspberryPi#WiFi">instructions</a> on the Ubuntu Wiki.
 
